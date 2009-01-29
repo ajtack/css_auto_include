@@ -1,8 +1,10 @@
 require 'test_helper'
 
 class CssAutoIncludeTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
+
+	# Seriously.
+  test "this test is going to be painful to set up" do
     flunk
   end
+
 end
