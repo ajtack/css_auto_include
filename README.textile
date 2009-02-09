@@ -1,0 +1,40 @@
+h1. CssAutoInclude
+
+This Rails plugin provides a template helper which identifies relevant stylesheets and links them to the page. Following the principle of convention over configuration, stylesheets may be organized and implicitly included based on their names.
+
+
+h2. Installation
+
+Just check the plugin out into your application's @/vendor/plugins@ directory. I suggest using the git submodule approach:
+<pre>
+	git submodule add git://github.com/ajtack/css_auto_include.git vendor/plugins/css_auto_include
+</pre>
+
+Remember: when you clone a separate repository, you must call @git submodule init@ and @git submodule update@ to actually populate submodules.
+
+h2. Usage
+
+Your @<head>@ tag in each page is probably in your layout. Add the following line where you would like the stylesheet link tags included:
+<pre>
+	<code>
+		<%= css_auto_include_tag %>
+	</code>
+</pre>
+	
+h3. Example
+
+<pre>
+	<code>
+		...
+		<head>
+			<title>My Amazing Page</title>
+			<meta name="author" content="Joe Blow" />
+			<%= css_auto_include_tag %>
+		</head>
+		...
+	</code>
+</pre>
+
+h2. Authorship
+
+Copyright (c) 2009 Andres Jaan Tack ["ajtack@gmail.com":mailto:ajtack@gmail.com]
