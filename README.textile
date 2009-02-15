@@ -1,0 +1,54 @@
+h1. CssAutoInclude
+
+This Rails plugin provides a template helper which identifies relevant stylesheets and links them to the page. Following the principle of convention over configuration, stylesheets may be organized and implicitly included based on controller name and template name.
+
+h2. Installation
+
+Just check the plugin out into your application's @/vendor/plugins@ directory. I suggest using the git submodule approach:
+<pre>
+	git submodule add git://github.com/ajtack/css_auto_include.git vendor/plugins/css_auto_include
+</pre>
+
+Remember: when you clone a separate repository, you must call @git submodule init@ and @git submodule update@ to actually populate submodules.
+
+h2. Usage
+
+Your @<head>@ tag in each page is probably in your layout. Add the following line where you would like the stylesheet link tags included:
+<pre>
+	<code>
+		<%= css_auto_include_tag %>
+	</code>
+</pre>
+
+This line will include up to three stylesheets from @public/stylesheets@, in the following order:
+# @application.css@
+# @controller_name.css@
+# @controller_name/template_name.css@
+	
+h3. Example
+
+Suppose we have a Rails application which sells books, CDs, and blankets. When we're looking at an individual blanket, we want to have a special layout so that customers can see close-ups of the fabric. Similarly, when we do anything with books, we have extra CSS which displays a preview of the table of contents. To support these style requirements separately, we fill our @public/stylesheets@ directory with the following:
+
+* @application.css@ (the general site layout)
+* @books.css@ (our style for the books controller)
+* @blankets/show.css@ (matching the @show@ action of the @blankets@ controller)
+
+In the default layout for our application (@layouts/application.html.erb@), we add the @css_auto_include@ tag as below.
+
+<pre>
+	<code>
+		...
+		<head>
+			<title>My Amazing Shop</title>
+			<meta name="author" content="Joe Blow" />
+			<%= css_auto_include_tag %>
+		</head>
+		...
+	</code>
+</pre>
+
+Now, when we navigate to the url @/cds/@, we get our application stylesheet and nothing extra. If we navigate to anything under @/books/@, we also get our books-specific stylesheet. Lastly, whenever we look at a particular blanket item (say, at the url @/blankets/1/@), we get only @application.css@ and @blankets/show.css@. All the other blanket views get @application.css@ alone.
+
+h2. Author
+
+Andres Jaan Tack(c)2009 ["ajtack@gmail.com":mailto:ajtack@gmail.com]
