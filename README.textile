@@ -2,6 +2,10 @@ h1. CssAutoInclude
 
 This Rails plugin provides a template helper which identifies relevant stylesheets and links them to the page. Following the principle of convention over configuration, stylesheets may be organized and implicitly included based on controller name and template name.
 
+h2. Requirements
+
+This plugin is designed for Rails 2.3. I have made no effort for its usefulness to previous versions in this edition. You will find, I think, a working Rails 2.2 version in the history of this repository.
+
 h2. Installation
 
 Just check the plugin out into your application's @/vendor/plugins@ directory. I suggest using the git submodule approach:
@@ -13,18 +17,32 @@ Remember: when you clone a separate repository, you must call @git submodule ini
 
 h2. Usage
 
+This plugin does some modification of the ApplicationController and ActionView::Base classes to make its usage almost transparent. As long as the layout and application controller base class are set up (two quick steps), the detection of CSS files by name is automatic.
+
+h3. Modify ApplicationController
+
+Add the following line to @app/controllers/application_controller.rb@:
+
+<pre>
+	<code>
+		activate_css_auto_include
+	</code>
+</pre>
+
+h3. Modify Your Layouts
+
 Your @<head>@ tag in each page is probably in your layout. Add the following line where you would like the stylesheet link tags included:
 <pre>
 	<code>
-		<%= css_auto_include_tag %>
+		<%= css_auto_include_tags %>
 	</code>
 </pre>
 
 This line will include up to three stylesheets from @public/stylesheets@, in the following order:
 # @application.css@
 # @controller_name.css@
-# @controller_name/template_name.css@
-	
+# @controller_name/primary_template_name.css@
+
 h3. Example
 
 Suppose we have a Rails application which sells books, CDs, and blankets. When we're looking at an individual blanket, we want to have a special layout so that customers can see close-ups of the fabric. Similarly, when we do anything with books, we have extra CSS which displays a preview of the table of contents. To support these style requirements separately, we fill our @public/stylesheets@ directory with the following:
