@@ -1,6 +1,6 @@
 h1. CssAutoInclude
 
-This Rails plugin provides a template helper which identifies relevant stylesheets and links them to the page. Following the principle of convention over configuration, stylesheets may be organized and implicitly included based on controller name and template name.
+This Rails plugin provides a template helper which identifies relevant stylesheets and links them to the page. Following the principle of convention over configuration, stylesheets may be organized and implicitly included based on controller name and principle template name.
 
 h2. Requirements
 
@@ -45,13 +45,13 @@ This line will include up to three stylesheets from @public/stylesheets@, in the
 
 h3. Example
 
-Suppose we have a Rails application which sells books, CDs, and blankets. When we're looking at an individual blanket, we want to have a special layout so that customers can see close-ups of the fabric. Similarly, when we do anything with books, we have extra CSS which displays a preview of the table of contents. To support these style requirements separately, we fill our @public/stylesheets@ directory with the following:
+Suppose we have a Rails application which sells books, CDs, and blankets. When we're looking at an _individual_ blanket, we want to have a special layout so that customers can see close-ups of the fabric. Similarly, when we do _anything_ with books, we have extra CSS which displays a preview of the book's text. To support these style requirements separately, we fill our @public/stylesheets@ directory with the following:
 
 * @application.css@ (the general site layout)
-* @books.css@ (our style for the books controller)
+* @books.css@ (our style for _all_ actions of the books controller)
 * @blankets/show.css@ (matching the @show@ action of the @blankets@ controller)
 
-In the default layout for our application (@layouts/application.html.erb@), we add the @css_auto_include@ tag as below.
+In the default layout for our application (@layouts/application.html.erb@), we add a call to the @css_auto_include_tags@  method as below.
 
 <pre>
 	<code>
@@ -59,7 +59,7 @@ In the default layout for our application (@layouts/application.html.erb@), we a
 		<head>
 			<title>My Amazing Shop</title>
 			<meta name="author" content="Joe Blow" />
-			<%= css_auto_include_tag %>
+			<%= css_auto_include_tags %>
 		</head>
 		...
 	</code>
