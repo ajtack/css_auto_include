@@ -39,7 +39,7 @@ Your @<head>@ tag in each page is probably in your layout. Add the following lin
 </pre>
 
 This line will include up to three stylesheets from @public/stylesheets@, in the following order:
-# @application.css@
+# @application.css@[1]
 # @controller_name.css@
 # @controller_name/primary_template_name.css@
 
@@ -47,7 +47,7 @@ h3. Example
 
 Suppose we have a Rails application which sells books, CDs, and blankets. When we're looking at an _individual_ blanket, we want to have a special layout so that customers can see close-ups of the fabric. Similarly, when we do _anything_ with books, we have extra CSS which displays a preview of the book's text. To support these style requirements separately, we fill our @public/stylesheets@ directory with the following:
 
-* @application.css@ (the general site layout)
+* @application.css@ (the general site layout)[1]
 * @books.css@ (our style for _all_ actions of the books controller)
 * @blankets/show.css@ (matching the @show@ action of the @blankets@ controller)
 
@@ -70,3 +70,5 @@ Now, when we navigate to the url @/cds/@, we get our application stylesheet and 
 h2. Author
 
 Andres Jaan Tack(c)2009 ["ajtack@gmail.com":mailto:ajtack@gmail.com]
+
+fn1. Currently, it does not matter which particular layout you employ; the stylesheet is *always* application.css. I haven't had a reason thus far to make this layout-specific, but it seems like it shouldn't be too bad.
