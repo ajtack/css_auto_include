@@ -15,7 +15,7 @@ module ActionView
 				# Define the names of the different possible stylesheets for this controller and template.
 				applicationCss = 'application.css'
 				controllerCss = "#{controller.controller_name}.css"
-				viewCss = File.join(controller.controller_name, response.rendered_templates.first.name + '.css')
+				viewCss = File.join(controller.controller_name, response.template.instance_variable_get(:@_first_render).path + '.css')
         
 				# Include the stylesheets that exist in public/stylesheets.
 				[applicationCss, controllerCss, viewCss].collect do |path|
