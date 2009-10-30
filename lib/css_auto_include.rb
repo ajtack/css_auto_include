@@ -14,7 +14,7 @@ module ActionView
 			def css_auto_include_tag
 				applicationCss = 'application.css'
 				controllerCss = "#{controller.controller_name}.css"
-				templateName = response.template.instance_variable_get(:@_render_stack).first.path
+				templateName = response.template.instance_variable_get(:@_first_render).path
 				viewCss = File.join(templateName[0...templateName.index(/\.html\.erb\z/)] + '.css')
         
 				[applicationCss, controllerCss, viewCss].collect do |path|
