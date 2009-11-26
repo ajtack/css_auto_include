@@ -14,9 +14,14 @@ module ActionView
 			def css_auto_include_tags
 				# Define the names of the different possible stylesheets for this controller and template.
 				applicationCss = 'application.css'
-				controllerCss = "#{controller.controller_name}.css"
-				viewCss = File.join(controller.controller_name, response.template.instance_variable_get(:@_first_render).path + '.css')
-        
+				controllerCss = "#{controller.controller_path}.css"
+				viewCss = lambda do
+					templatePath = response.template.instance_variable_get(:@_first_render).path
+					directory = File.dirname(templatePath)
+					file = File.basename(templatePath, '.html.erb')
+					File.join(directory, file + '.css')
+				end.call
+				        
 				# Include the stylesheets that exist in public/stylesheets.
 				[applicationCss, controllerCss, viewCss].collect do |path|
 					if File.exist?(File.join(RAILS_ROOT, 'public', 'stylesheets', path))
